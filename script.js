@@ -3,6 +3,10 @@ let newestBook = [];
 const container = document.getElementById('container');
 const newBookBtn = document.getElementById('new-book-btn');
 const newBookModal = document.getElementById('modal');
+const userInputTitle = document.getElementById('title');
+const userInputAuthor = document.getElementById('author');
+const userInputPages = document.getElementById('pages');
+const userInputRead = document.getElementById('read-checkbox');
 
 
 //constructor
@@ -11,6 +15,7 @@ function book (title, author, pages, read) {
     this.author = author,
     this.pages = pages,
     this.read = read;
+    console.log(userInputAuthor.value);
     return [title , author, pages, read];
 
 }
@@ -47,21 +52,32 @@ const displayTheLibrary = () => {
     });
 };
 
+
 const addNewBook = () => {
     newBookBtn.addEventListener('click', () => {
         newBookModal.style.visibility = "visible";
+        userInputTitle.value = '';
+        userInputAuthor.value = '';
+        userInputPages.value = '';
+        userInputRead.value = 'Not read yet';
     });
     document.getElementById('add-btn').addEventListener('click', () => {
         newBookModal.style.visibility = "hidden";
+        if (document.querySelector('input[type=checkbox]').checked) {
+            userInputRead.value = 'Read';
+        }
+        addToLibrary(userInputTitle.value, userInputAuthor.value, userInputPages.value, userInputRead.value);
     });
 }
  addNewBook();
 
-addToLibrary('Hyperspace', 'Michio Kaku', '359', 'Not read yet');
-addToLibrary('The Quantum Story', 'Jim Baggott', '469', 'Not read yet');
-addToLibrary('Fallteknikk', 'Inga Sætre', '198', 'Read');
-addToLibrary('Swann\'s way', 'Marcel Proust', '512', 'Not read yet')
-addToLibrary('Crime and Punishment', 'Fyodor Dostoyevsky', '492', 'Read')
+
+
+// addToLibrary('Hyperspace', 'Michio Kaku', '359', 'Not read yet');
+// addToLibrary('The Quantum Story', 'Jim Baggott', '469', 'Not read yet');
+// addToLibrary('Fallteknikk', 'Inga Sætre', '198', 'Read');
+// addToLibrary('Swann\'s way', 'Marcel Proust', '512', 'Not read yet')
+// addToLibrary('Crime and Punishment', 'Fyodor Dostoyevsky', '492', 'Read')
 
 
 
