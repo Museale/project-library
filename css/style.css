@@ -1,0 +1,16 @@
+#container {
+  display: grid;
+  border: 1px solid grey;
+  height: 60vh;
+  width: 98vw;
+  margin: 2rem 1rem 0 1rem;
+}
+#container .card {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  border: 1px dashed lightpink;
+}
+#container .card, #container .card-item {
+  border: 1px solid lightblue;
+}/*# sourceMappingURL=style.css.map */
