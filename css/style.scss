@@ -18,32 +18,34 @@ header {
     grid-template-rows: 1fr;
     gap: 1rem;
     padding: 3rem;
-    button {
+    #new-book-btn {
         min-height: 250px;
     }
 
     .card {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(4, 1fr);
+        grid-template-rows: repeat(5, 1fr);
         border: 1px dashed lightpink;
         justify-content: center;
         justify-items: center;
-        padding: 2rem;
+        padding: 1rem;
         min-height: 250px;
+        max-height: 300px;
 
         .card-item {
             display: flex;
             flex-flow: row nowrap;
-            padding: 5px;
-            
+            padding: 5px;   
+            align-items: center;
+            button {
+                padding: 1px;
+                border-radius: 50%;
+                
+            }
          }
     }
-
-   
 }
-
-
 
 #modal {
     visibility: hidden;
@@ -62,11 +64,8 @@ header {
         appearance: none;
         border-radius: 55px;
         display: block;
-        
         padding: 5px; 
-
     }
-   
-
 }
+
 

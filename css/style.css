@@ -17,23 +17,29 @@ header h2 {
   gap: 1rem;
   padding: 3rem;
 }
-#container button {
+#container #new-book-btn {
   min-height: 250px;
 }
 #container .card {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   border: 1px dashed lightpink;
   justify-content: center;
   justify-items: center;
-  padding: 2rem;
+  padding: 1rem;
   min-height: 250px;
+  max-height: 300px;
 }
 #container .card .card-item {
   display: flex;
   flex-flow: row nowrap;
   padding: 5px;
+  align-items: center;
+}
+#container .card .card-item button {
+  padding: 1px;
+  border-radius: 50%;
 }
 
 #modal {

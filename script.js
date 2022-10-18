@@ -41,16 +41,44 @@ const displayTheLibrary = () => {
         let displayBook = document.createElement('div');
         displayBook.classList.add('card');
         container.appendChild(displayBook);
+        const toggleReadBtn = document.createElement('button');
+
+        if (userInputRead.value == 'Read') {
+            toggleReadBtn.textContent = 'Not read';
+        } else {
+            toggleReadBtn.textContent = 'Read';
+        }
+        toggleReadBtn.classList.add('card-item');
+        toggleReadBtn.id = 'toggle';
+
+        toggleReadBtn.addEventListener('click', () => {
+            if (userInputRead.value == 'Read') {
+                userInputRead.value = 'Not read yet';
+                userInputRead.textContent = 'not read';
+            } else {
+                userInputRead.value = 'Read';
+            }
+        });
+
             item.forEach(item => item.map((e) => {
-                let bookInfo = document.createElement('div');
+                const bookInfo = document.createElement('div');
                 bookInfo.classList.add('card-item');
                 let infoItem = e.toString();
                 bookInfo.textContent = infoItem;
                 displayBook.appendChild(bookInfo);
+
                 return bookInfo; 
             }));
+
+            displayBook.appendChild(toggleReadBtn);
     });
 };
+
+   
+
+// set the toggleReadBtn to the value of the checkbox button
+//If toggleReadBtn is pressed change the value to the opposite of what it was
+
 
 
 const addNewBook = () => {
@@ -66,6 +94,10 @@ const addNewBook = () => {
         if (document.querySelector('input[type=checkbox]').checked) {
             userInputRead.value = 'Read';
         }
+        if (userInputTitle.value == '' | userInputAuthor.value == '' | userInputPages == '') {
+            alert('Please input title, author, pages.');
+            return;
+        };
         addToLibrary(userInputTitle.value, userInputAuthor.value, userInputPages.value, userInputRead.value);
     });
 }
@@ -73,7 +105,7 @@ const addNewBook = () => {
 
 
 
-// addToLibrary('Hyperspace', 'Michio Kaku', '359', 'Not read yet');
+addToLibrary('Hyperspace', 'Michio Kaku', '359', 'Not read yet');
 // addToLibrary('The Quantum Story', 'Jim Baggott', '469', 'Not read yet');
 // addToLibrary('Fallteknikk', 'Inga Sætre', '198', 'Read');
 // addToLibrary('Swann\'s way', 'Marcel Proust', '512', 'Not read yet')
