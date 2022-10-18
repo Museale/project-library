@@ -1,21 +1,20 @@
-header {
-  display: grid;
-  justify-items: center;
+header h1 {
+  text-align: center;
 }
 header h2 {
+  text-align: center;
   font-size: 1rem;
 }
 
 #container {
   display: grid;
-  border: 1px solid grey;
-  height: auto;
-  width: 98vw;
-  margin: 2rem 1rem 0 1rem;
+  width: 80%;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   grid-template-rows: 1fr;
-  gap: 1rem;
+  gap: 2rem;
   padding: 3rem;
+  margin: auto;
+  margin-top: 50px;
 }
 #container #new-book-btn {
   min-height: 250px;
@@ -23,11 +22,11 @@ header h2 {
 #container .card {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: 2fr repeat(5, 1fr);
   border: 1px dashed lightpink;
   justify-content: center;
   justify-items: center;
-  padding: 1rem;
+  padding: 1.5rem;
   min-height: 250px;
   max-height: 300px;
 }
@@ -40,6 +39,30 @@ header h2 {
 #container .card .card-item button {
   padding: 1px;
   border-radius: 50%;
+}
+
+#display-book > div:nth-child(1) {
+  font-size: larger;
+  font-weight: bold;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+#display-book > div:nth-child(3) {
+  grid-row: -3;
+}
+
+#display-book > div:nth-child(4) {
+  grid-row: -2;
+}
+
+#toggle {
+  grid-row: -1;
+  background-color: white;
+  border-radius: 5px;
+  width: 78px;
+  align-items: center;
+  justify-content: center;
 }
 
 #modal {

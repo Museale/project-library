@@ -38,48 +38,43 @@ function addToLibrary (...args) {
 //displays the books
 const displayTheLibrary = () => {
     newestBook.forEach(item => {
+       
         let displayBook = document.createElement('div');
         displayBook.classList.add('card');
+        displayBook.id = 'display-book';
         container.appendChild(displayBook);
         const toggleReadBtn = document.createElement('button');
-
-        if (userInputRead.value == 'Read') {
-            toggleReadBtn.textContent = 'Not read';
-        } else {
-            toggleReadBtn.textContent = 'Read';
-        }
-        toggleReadBtn.classList.add('card-item');
         toggleReadBtn.id = 'toggle';
-
-        toggleReadBtn.addEventListener('click', () => {
-            if (userInputRead.value == 'Read') {
-                userInputRead.value = 'Not read yet';
-                userInputRead.textContent = 'not read';
+          if (userInputRead.value == 'Read') {
+                toggleReadBtn.textContent = 'Not read';
             } else {
-                userInputRead.value = 'Read';
-            }
-        });
-
+                toggleReadBtn.textContent = 'Read';
+            };
+     
+            toggleReadBtn.classList.add('card-item');
+            toggleReadBtn.addEventListener('click', (e) => {
+                // const readTextContent = document.querySelector("#display-book > div:nth-child(4)");
+                if (userInputRead.value == 'Read') {
+                    userInputRead.value = 'Not read yet';
+                    toggleReadBtn.textContent = 'Not read';
+                } else {
+                    userInputRead.value = 'Read';
+                
+                    toggleReadBtn.textContent = 'Read';
+                };
+            });
+            
             item.forEach(item => item.map((e) => {
                 const bookInfo = document.createElement('div');
                 bookInfo.classList.add('card-item');
                 let infoItem = e.toString();
                 bookInfo.textContent = infoItem;
                 displayBook.appendChild(bookInfo);
-
                 return bookInfo; 
             }));
-
             displayBook.appendChild(toggleReadBtn);
     });
 };
-
-   
-
-// set the toggleReadBtn to the value of the checkbox button
-//If toggleReadBtn is pressed change the value to the opposite of what it was
-
-
 
 const addNewBook = () => {
     newBookBtn.addEventListener('click', () => {
@@ -93,6 +88,7 @@ const addNewBook = () => {
         newBookModal.style.visibility = "hidden";
         if (document.querySelector('input[type=checkbox]').checked) {
             userInputRead.value = 'Read';
+            userInputRead.dataset.read = 'o';
         }
         if (userInputTitle.value == '' | userInputAuthor.value == '' | userInputPages == '') {
             alert('Please input title, author, pages.');
@@ -100,16 +96,18 @@ const addNewBook = () => {
         };
         addToLibrary(userInputTitle.value, userInputAuthor.value, userInputPages.value, userInputRead.value);
     });
-}
+};
+
+
  addNewBook();
 
 
 
 addToLibrary('Hyperspace', 'Michio Kaku', '359', 'Not read yet');
-// addToLibrary('The Quantum Story', 'Jim Baggott', '469', 'Not read yet');
-// addToLibrary('Fallteknikk', 'Inga Sætre', '198', 'Read');
-// addToLibrary('Swann\'s way', 'Marcel Proust', '512', 'Not read yet')
-// addToLibrary('Crime and Punishment', 'Fyodor Dostoyevsky', '492', 'Read')
+addToLibrary('The Quantum Story', 'Jim Baggott', '469', 'Not read yet');
+addToLibrary('Fallteknikk', 'Inga Sætre', '198', 'Read');
+addToLibrary('Swann\'s way', 'Marcel Proust', '512', 'Not read yet')
+addToLibrary('Crime and Punishment', 'Fyodor Dostoyevsky', '492', 'Read')
 
 
 
