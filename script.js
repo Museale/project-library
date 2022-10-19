@@ -35,44 +35,54 @@ function addToLibrary (...args) {
     return theLibrary;
 }
 
+let cardValue = 0;
+let readBtnValue = 0;
+let cardItemValue = 0;
+
 //displays the books
 const displayTheLibrary = () => {
     newestBook.forEach(item => {
-       
         let displayBook = document.createElement('div');
         displayBook.classList.add('card');
-        displayBook.id = 'display-book';
+        displayBook.dataset.number = cardValue++;
         container.appendChild(displayBook);
         const toggleReadBtn = document.createElement('button');
-        toggleReadBtn.id = 'toggle';
-          if (userInputRead.value == 'Read') {
-                toggleReadBtn.textContent = 'Not read';
-            } else {
-                toggleReadBtn.textContent = 'Read';
-            };
-     
+            toggleReadBtn.dataset.number = readBtnValue++;
+            toggleReadBtn.id = 'toggle';
+            toggleReadBtn.textContent = userInputRead.value;
             toggleReadBtn.classList.add('card-item');
             toggleReadBtn.addEventListener('click', (e) => {
-                // const readTextContent = document.querySelector("#display-book > div:nth-child(4)");
                 if (userInputRead.value == 'Read') {
-                    userInputRead.value = 'Not read yet';
+                    userInputRead.value = 'Not read yet'; 
                     toggleReadBtn.textContent = 'Not read';
                 } else {
                     userInputRead.value = 'Read';
-                
+    
                     toggleReadBtn.textContent = 'Read';
                 };
             });
+        const removeBookBtn = document.createElement('button');
+            removeBookBtn.dataset.number = cardItemValue;
+            removeBookBtn.id = "remove";
+            removeBookBtn.textContent = 'Remove book';
+            removeBookBtn.classList.add('card-item');
+            removeBookBtn.addEventListener('click', (e) => {
+                e.target.parentElement.remove();
+            });
             
+
             item.forEach(item => item.map((e) => {
                 const bookInfo = document.createElement('div');
+                bookInfo.dataset.number = cardItemValue++;
                 bookInfo.classList.add('card-item');
                 let infoItem = e.toString();
                 bookInfo.textContent = infoItem;
                 displayBook.appendChild(bookInfo);
                 return bookInfo; 
             }));
+
             displayBook.appendChild(toggleReadBtn);
+            displayBook.appendChild(removeBookBtn);
     });
 };
 
@@ -88,7 +98,6 @@ const addNewBook = () => {
         newBookModal.style.visibility = "hidden";
         if (document.querySelector('input[type=checkbox]').checked) {
             userInputRead.value = 'Read';
-            userInputRead.dataset.read = 'o';
         }
         if (userInputTitle.value == '' | userInputAuthor.value == '' | userInputPages == '') {
             alert('Please input title, author, pages.');
@@ -97,7 +106,7 @@ const addNewBook = () => {
         addToLibrary(userInputTitle.value, userInputAuthor.value, userInputPages.value, userInputRead.value);
     });
 };
-
+ 
 
  addNewBook();
 

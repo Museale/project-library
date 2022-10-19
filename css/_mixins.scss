@@ -1,0 +1,17 @@
+@import './variables';
+
+@mixin books() {
+    border-left: 15px solid $secondary-book-colour;
+    background-color: $primary-book-colour;
+    box-shadow: 12px 8px 12px $box-shadow-colour;
+    text-shadow:$text-shadow-colour;
+    color: $primary-text-colour;
+    background-image: url(./noise.svg);
+    padding: 1.5rem;
+    min-width: 210px;
+    min-height: 210px;
+    border-radius: 5px;
+    border-bottom-left-radius: 14px;
+    border-top-left-radius: 14px;
+    border-bottom: 10px solid $paper-colour;
+}

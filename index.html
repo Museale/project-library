@@ -18,20 +18,21 @@
     <div id="modal">
         <div id="modal-content">
             <label for="title">Title: </label>
-            <input type="text" id="title" value="" required>
-            <label for="author" name="title">Author: </label>
-            <input type="text" name="author" id="author" value="" required>
+            <input type="text" id="title" required>
+            <label for="author" name="author">Author: </label>
+            <input type="text" name="author" id="author" required>
             <label for="pages">Pages: </label>
-            <input type="text" name="pagecount" id="pages" value="" pattern="[0-9]" required >
+            <input type="text" name="pagecount" id="pages"  pattern="[0-9]" required >
             <label for="read-checkbox">Read</label>
-            <input type="checkbox" id="read-checkbox" value="Not read yet">
+            <input type="checkbox" id="read-checkbox" value="Not read" >
+    
             <button id="add-btn">Add</button>
         </div>
     </div>
 
     <main>
         <div id ="container">
-            <button id="new-book-btn">New Book</button>
+                <button id="new-book-btn">New Book</button>
         </div>
     </main>
    

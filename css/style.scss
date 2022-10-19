@@ -1,9 +1,11 @@
-:root {
-    background-color: black;
-}
+@import 'header.scss';
+@import 'main-content.scss';
+@import 'mixins.scss';
+@import 'modal.scss';
+@import 'variables.scss';
+
 
 header {
-
     h1 {
         text-align: center;
         padding: 1rem;
@@ -20,26 +22,15 @@ header {
     display: grid;
     width: 80%;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    grid-template-rows: 1fr;
-    gap: 2rem;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 40px;
     padding: 3rem;
     margin: auto;
-
+    
     #new-book-btn {
-        background-image: url(./noise.svg);
-        min-height: 250px;
-        color: rgb(165, 140, 0);
         border: none;
         font-size: larger; 
-        border-left: 15px solid rgba(83, 1, 28, 0.911);
-        background-color: rgb(110, 1, 37);
-        box-shadow: 12px 8px 12px rgba(53, 53, 75, 0.37);
-        text-shadow: black 2px 2px 2px;
-        border-radius: 5px;
-        border-bottom-left-radius: 14px;
-        border-top-left-radius: 14px;
-        border-bottom: 10px solid rgb(233, 228, 218);
-        max-width: 315px;
+        @include books();
     };
 
     button:hover {
@@ -49,31 +40,18 @@ header {
     }
 
     .card {
+        @include books();
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 2fr repeat(5, 1fr);
-        background-image: url(./noise.svg);
-        box-shadow: 12px 8px 12px rgba(53, 53, 75, 0.37);
-        color: white;
-        text-shadow: black 2px 2px 2px;
-        justify-content: center;
-        justify-items: center;
-        padding: 1.5rem;
-        min-width: 210px;
-        max-height: 300px;
-        max-width: 250px;
-        border-left: 15px solid  rgba(83, 1, 28, 0.911);
-        background-color: rgb(110, 1, 37, 1);
-        border-radius: 5px;
-        border-bottom-left-radius: 14px;
-        border-top-left-radius: 14px;
-        border-bottom: 10px solid rgb(233, 228, 218);
+        grid-template-rows: 1fr 2fr repeat(5, 1fr);
+
     }
         .card-item {
             display: flex;
             flex-flow: row nowrap;
             padding: 5px;   
             align-items: center;
+            justify-content: center;
             button {
                 padding: 1px;
                 border-radius: 50%;
@@ -81,19 +59,25 @@ header {
          }
     }
 
-#display-book > div:nth-child(1) {
+
+.card-item:nth-child(1) {
     font-size: larger;
     font-weight: bold;
-    grid-row: 1;
+    grid-row: 2;
     grid-column: 1;
-} 
+}
 
-#display-book > div:nth-child(3) {
+.card-item:nth-child(2) {
+    grid-row: 3;
+}
+
+.card-item:nth-child(3) {
     grid-row: -3;
 }
 
-#display-book > div:nth-child(4) {
+.card-item:nth-child(4) {
     grid-row: -2;
+   visibility: hidden;
 }
 
 #toggle {
@@ -101,14 +85,16 @@ header {
     // margin-left: 220px;
     // margin-top: 218px;
     grid-row: -1;
+    display:inherit;  
+    justify-content: inherit;
+    align-items: inherit;
     background-color: rgba(110, 1, 37, 0.452);
     color: white;
     box-shadow: inset 2px 2px 12px rgba(66, 5, 5, 0.74);
     border: none;
     border-radius: 5px;
     width: 78px;
-    align-items: center;
-    justify-content: center;
+
 }
 
 
@@ -138,6 +124,7 @@ header {
         padding: 5px;
     }
     z-index: 10;
+    box-shadow: $primary-book-colour -4px 2px 1px,
 }
 
 #modal-content::before {
@@ -150,7 +137,6 @@ header {
     border: 2px dashed;
     color:  rgb(233, 228, 218);
     border-width: 0 0 0 1px;
-
     background-color: rgb(202, 182, 143);
 }
 
