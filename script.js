@@ -1,5 +1,9 @@
 let theLibrary = [];
 let newestBook = [];
+let cardValue = 0;
+let readBtnValue = 0;
+let cardItemValue = 0;
+
 const container = document.getElementById('container');
 const newBookBtn = document.getElementById('new-book-btn');
 const newBookModal = document.getElementById('modal');
@@ -35,10 +39,6 @@ function addToLibrary (...args) {
     return theLibrary;
 }
 
-let cardValue = 0;
-let readBtnValue = 0;
-let cardItemValue = 0;
-
 //displays the books
 const displayTheLibrary = () => {
     newestBook.forEach(item => {
@@ -55,21 +55,24 @@ const displayTheLibrary = () => {
                 if (userInputRead.value == 'Read') {
                     userInputRead.value = 'Not read yet'; 
                     toggleReadBtn.textContent = 'Not read';
+                    toggleReadBtn.style.background = "transparent";
+                  
                 } else {
                     userInputRead.value = 'Read';
-    
                     toggleReadBtn.textContent = 'Read';
+                    toggleReadBtn.style.background = "rgba(194, 165, 3, 0.50)";
                 };
+
             });
         const removeBookBtn = document.createElement('button');
             removeBookBtn.dataset.number = cardItemValue;
             removeBookBtn.id = "remove";
-            removeBookBtn.textContent = 'Remove book';
+            removeBookBtn.textContent = 'Remove';
             removeBookBtn.classList.add('card-item');
             removeBookBtn.addEventListener('click', (e) => {
                 e.target.parentElement.remove();
             });
-            
+
 
             item.forEach(item => item.map((e) => {
                 const bookInfo = document.createElement('div');

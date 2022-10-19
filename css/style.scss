@@ -1,22 +1,27 @@
-@import 'header.scss';
-@import 'main-content.scss';
 @import 'mixins.scss';
-@import 'modal.scss';
 @import 'variables.scss';
 
+:root {
+    background-color: rgba(202, 190, 173, 0.425);
+     background-image: url(./nasa--hI5dX2ObAs-unsplash.jpg);
+}
 
 header {
+    text-shadow: $text-shadow-colour;
+    font-family: 'Pelejaregular10';
+    font-weight: normal;
+    font-style: normal;
+    color: $primary-text-colour;
+    text-align: center;
     h1 {
-        text-align: center;
         padding: 1rem;
-        color: rgb(165, 140, 0);
     }
     h2 {
-        color:rgb(165, 140, 0);
-        text-align: center;
-        font-size: 01rem;
+        font-size: 1rem;
     }
+
 }
+
 
 #container {
     display: grid;
@@ -26,7 +31,10 @@ header {
     gap: 40px;
     padding: 3rem;
     margin: auto;
-    
+    font-family: 'CursiveSansBold';
+    font-style: italic;
+    font-size: 0.8rem;
+
     #new-book-btn {
         border: none;
         font-size: larger; 
@@ -42,11 +50,12 @@ header {
     .card {
         @include books();
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 2fr repeat(5, 1fr);
 
     }
         .card-item {
+            grid-column: 1 / span 2;
             display: flex;
             flex-flow: row nowrap;
             padding: 5px;   
@@ -61,10 +70,15 @@ header {
 
 
 .card-item:nth-child(1) {
-    font-size: larger;
+    font-size: 1.2rem;
+    padding: 0;
+    width: 120%;
+    justify-self: center;
+    align-self: center;
+    justify-content: center;
     font-weight: bold;
     grid-row: 2;
-    grid-column: 1;
+    grid-column: 1 / span 2;
 }
 
 .card-item:nth-child(2) {
@@ -81,23 +95,29 @@ header {
 }
 
 #toggle {
-    // position: absolute;
-    // margin-left: 220px;
-    // margin-top: 218px;
     grid-row: -1;
-    display:inherit;  
-    justify-content: inherit;
-    align-items: inherit;
-    background-color: rgba(110, 1, 37, 0.452);
-    color: white;
-    box-shadow: inset 2px 2px 12px rgba(66, 5, 5, 0.74);
-    border: none;
-    border-radius: 5px;
+    grid-column: 1 / 1;
     width: 78px;
+    background-color: transparent;
+    color: $primary-text-colour;
+    text-shadow: 1px 1px 1px black;
 
+    border:rgb(165, 140, 0) 1px solid;
+    box-shadow: inset -2px -2px 2px $primary-text-colour;
 }
 
 
+#remove {
+    background-color: transparent;
+    color: $primary-text-colour;
+    border:rgb(165, 140, 0) 1px solid;
+    box-shadow: inset -2px -2px 2px $primary-text-colour;
+    text-shadow: 1px 1px 1px black;
+    grid-row: -1;
+    grid-column: 1 / 1;
+    width: 78px;
+    justify-self: flex-end;
+}
 
 #modal {
     visibility: hidden;
@@ -117,14 +137,40 @@ header {
     padding: 5rem;
     width: 500px;
     background-color: rgb(255, 255, 255);
+    font-family: cursiveSansBold;
+    font-weight: light;
+    color: $primary-text-colour;
+    text-shadow: $text-shadow-colour;
+    z-index: 10;
+    box-shadow: $primary-book-colour -4px 2px 1px;
+
+    button {
+        background: transparent;
+        border: 2px solid $primary-text-colour;
+        padding: 5px;
+        margin-left: 100px;
+        color: $primary-text-colour;
+        text-shadow: $text-shadow-colour;
+    }
+
+    button:hover,   input[type="checkbox"] {
+        cursor: pointer;
+        transform: scale(1.1);
+        transition: 0.2s ease-in-out;
+    }
+
     input[type="text"] {
         appearance: none;
-        border-radius: 55px;
+        border: none;
+        border-radius: 5px;
         display: block;
         padding: 5px;
+        margin: 15px 0 15px;
+        outline: none;
     }
-    z-index: 10;
-    box-shadow: $primary-book-colour -4px 2px 1px,
+    input[type="checkbox"] {
+        margin-left: 10px;
+    }
 }
 
 #modal-content::before {
