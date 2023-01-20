@@ -120,8 +120,6 @@ const userInputRead = document.getElementById('read-checkbox');
 // // addToLibrary('Crime and Punishment', 'Fyodor Dostoyevsky', '492', 'Read')
 
 
-
-
 let library = [];
 
 class Book {
@@ -134,57 +132,71 @@ class Book {
     }
 
     addToLibrary() {
-        
        library.push([`${this.title}, ${this.author}, ${this.pages},${this.read}`]);
+    
+    const displayBook = document.createElement('div');
+    displayBook.classList.add('card');
+    displayBook.dataset.number = cardValue++;
+    container.appendChild(displayBook);
 
-       const displayBook = document.createElement('div');
-       displayBook.classList.add('card');
-       displayBook.dataset.number = cardValue++;
-       container.appendChild(displayBook);
+    const toggleReadBtn = document.createElement('button');
+        toggleReadBtn.dataset.number = readBtnValue++;
+        toggleReadBtn.id = 'toggle';
+        toggleReadBtn.textContent = userInputRead.value;
+        toggleReadBtn.classList.add('card-item');
+        toggleReadBtn.addEventListener('click', (e) => {
+            if (userInputRead.value == 'Read') {
+                userInputRead.value = 'Not read yet'; 
+                toggleReadBtn.textContent = 'Not read';
+                toggleReadBtn.style.background = "transparent";     
+                } else {
+                    userInputRead.value = 'Read';                            toggleReadBtn.textContent = 'Read';
+                    toggleReadBtn.style.background = "rgba(194, 165, 3, 0.50)";
+                    }
+            })
 
-       const toggleReadBtn = document.createElement('button');
-            toggleReadBtn.dataset.number = readBtnValue++;
-            toggleReadBtn.id = 'toggle';
-            toggleReadBtn.textContent = userInputRead.value;
-            toggleReadBtn.classList.add('card-item');
-            toggleReadBtn.addEventListener('click', (e) => {
-                 if (userInputRead.value == 'Read') {
-                    userInputRead.value = 'Not read yet'; 
-                    toggleReadBtn.textContent = 'Not read';
-                    toggleReadBtn.style.background = "transparent";     
-                    } else {
-                        userInputRead.value = 'Read';                            toggleReadBtn.textContent = 'Read';
-                        toggleReadBtn.style.background = "rgba(194, 165, 3, 0.50)";
-                        }
-                })
-
-        const removeBookBtn = document.createElement('button');
-            removeBookBtn.dataset.number = cardItemValue;
-            removeBookBtn.id = "remove";
-            removeBookBtn.textContent = 'Remove';
-            removeBookBtn.classList.add('card-item');
-            removeBookBtn.addEventListener('click', (e) => {
-                e.target.parentElement.remove();
-                console.log(library)
-            });
-
-            const bookInfo = document.createElement('div');
-                bookInfo.dataset.number = cardItemValue++;
-                bookInfo.classList.add('card-item');
-                let infoItem = this.title.toString();
-                bookInfo.textContent = infoItem;
-                displayBook.appendChild(bookInfo);
-
-            displayBook.appendChild(toggleReadBtn);
-            displayBook.appendChild(removeBookBtn)
+    const removeBookBtn = document.createElement('button');
+        removeBookBtn.dataset.number = cardItemValue;
+        removeBookBtn.id = "remove";
+        removeBookBtn.textContent = 'Remove';
+        removeBookBtn.classList.add('card-item');
+        removeBookBtn.addEventListener('click', (e) => {
+            e.target.parentElement.remove();
             console.log(library)
+        });
 
-    }
-
-    newBook() {
-        
-    }
+    const bookInfo = document.createElement('div');
+        bookInfo.dataset.number = cardItemValue++;
+        bookInfo.classList.add('card-item');
+        bookInfo.textContent = `${this.title} \r\n ${this.author}`;
+        displayBook.appendChild(bookInfo);
+        displayBook.appendChild(toggleReadBtn);
+        displayBook.appendChild(removeBookBtn)
+        console.log(library)
 }
+
+}
+    newBookBtn.addEventListener('click', () => {
+        newBookModal.style.visibility = "visible";
+        userInputTitle.value = '';
+        userInputAuthor.value = '';
+        userInputPages.value = '';
+        userInputRead.value = 'Not read';
+    });
+    document.getElementById('add-btn').addEventListener('click', () => {
+        event.preventDefault();
+        newBookModal.style.visibility = "hidden";
+        const newBook = new Book(userInputTitle.value, userInputAuthor.value, userInputPages.value, userInputRead.value);
+       
+        if (document.querySelector('input[type=checkbox]').checked) {
+            userInputRead.value = 'Read';
+        }
+        if (userInputTitle.value == '' | userInputAuthor.value == '' | userInputPages == '') {
+            alert('Please input title, author, pages.');
+            return;
+        };
+        newBook.addToLibrary();
+    });
 
 
 const book1 = new Book('Hyperspace', 'Michio Kaku', '359', 'Not read yet').addToLibrary();
@@ -192,3 +204,6 @@ const book2 = new Book('The Quantum Story', 'Jim Baggott', '469', 'Not read yet'
 const book3 = new Book('Fallteknikk', 'Inga Sætre', '198', 'Read').addToLibrary();
 const book4 = new Book('Swann\'s way', 'Marcel Proust', '512', 'Not read yet').addToLibrary();
 const book5 = new Book('Crime and Punishment', 'Fyodor Dostoyevsky', '492', 'Read').addToLibrary();
+
+
+

@@ -76,9 +76,9 @@ header {
     justify-self: center;
     align-self: center;
     justify-content: center;
-    font-weight: bold;
     grid-row: 2;
     grid-column: 1 / span 2;
+    white-space: pre-line;
 }
 
 .card-item:nth-child(2) {
