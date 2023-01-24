@@ -17,6 +17,7 @@ class Book {
         this.read = read;
         this.toggleReadBtn = document.createElement('button');
         this.toggleReadBtn.id = 'toggle';
+        userInputRead.checked ? this.toggleReadBtn.textContent = 'Read' :
         this.toggleReadBtn.textContent = this.read; 
         this.toggleReadBtn.classList.add('card-item');
         this.toggleReadBtn.addEventListener('click', () => {
@@ -32,38 +33,32 @@ class Book {
     }
 
     toggleRead() {
-        if (userInputRead.value == 'Read') {
-            userInputRead.value = 'Not read'; 
-            this.toggleReadBtn.textContent = 'Not read';
-            this.toggleReadBtn.style.background = "transparent";     
-            } else {
-                userInputRead.value = 'Read';                            
-                this.toggleReadBtn.textContent = 'Read';
-                this.toggleReadBtn.style.background = 'rgba(194, 165, 3, 0.50)';
-            }
-        }
+        this.read = !this.read;
+        this.toggleReadBtn.textContent = this.read ? 'Read' : 'Not read';
+        this.toggleReadBtn.style.background = this.read ? 'rgba(194, 165, 3, 0.50)' : "transparent";
+    }
 
     remove(e) {
         e.target.parentElement.remove();
     }
-   
 }
 
 class Library {
     constructor() {
-        this.libraryArray = [];
-
-       
+        this.libraryArray = [];       
     }
+
     addBook(book) {
         this.libraryArray.push(book);
         this.display()
     }
 
     display() {
+
        while (container.firstChild) {
         container.removeChild(container.firstChild);
        }
+
         this.libraryArray.forEach(book => {
             const bookCard = document.createElement('div');
             bookCard.classList.add('card');
@@ -79,6 +74,7 @@ class Library {
 
             const pages = document.createElement('div');
             pages.textContent = book.pages;
+
 
             bookCard.appendChild(book.toggleReadBtn);
             bookCard.appendChild(book.removeBookBtn);
@@ -107,7 +103,9 @@ class Library {
         event.preventDefault();
         newBookModal.style.visibility = 'hidden';
         const newBook = new Book(userInputTitle.value, userInputAuthor.value, userInputPages.value, userInputRead.value);
-       
+        if (!userInputRead.checked) {
+            userInputRead.value = 'Not read';
+        }
         if (userInputRead.checked) {
             userInputRead.value = 'Read';
         }
@@ -117,9 +115,11 @@ class Library {
         };
         myLibrary.addBook(newBook);
     });
+
     closeModal.addEventListener('click', () => {
-        newBookModal.style.visibility = 'hidden' }
-    )
+        newBookModal.style.visibility = 'hidden' 
+        }
+    );
     
 
 const myLibrary = new Library();
