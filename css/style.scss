@@ -21,6 +21,9 @@ header {
     }
 
 }
+input[type="submit"]{
+    cursor: pointer;
+}
 
 #new-book-btn {
     cursor:pointer;
@@ -149,25 +152,25 @@ header {
     z-index: 10;
     box-shadow: $primary-book-colour -4px 2px 1px;
 
-    button {
+    input[type="submit"] {
         background: transparent;
-        border: 2px solid $primary-text-colour;
+        border: 1px solid $primary-text-colour;
         padding: 5px;
-        margin-left: 100px;
+        margin-left: 58px;
         color: $primary-text-colour;
         text-shadow: $text-shadow-colour;
     }
      #close-modal {
         font-family: 'Courier New', Courier, monospace;
-        width: 55%;
+        background-color: transparent;
         font-weight: lighter;
         border: none;
         position:absolute;
         margin-top: -10%;
-        justify-content: flex-end;
-
+        margin-left: 240px;
+    
     }
-    button:hover,   input[type="checkbox"] {
+    input[type="submit"]:hover,   input[type="checkbox"], button {
         cursor: pointer;
         transform: scale(1.1);
         transition: 0.1s ease-in-out;
@@ -184,8 +187,14 @@ header {
     }
     input[type="checkbox"] {
         margin-left: 10px;
+        width: 18px;
+        height: 18px;
     }
-   
+   #buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   }
 }
 
 #modal-content::before {

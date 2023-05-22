@@ -1,7 +1,7 @@
 const container = document.getElementById('container');
 const newBookBtn = document.getElementById('new-book-btn')
 const newBookModal = document.getElementById('modal');
-const addBook = document.getElementById('add-btn')
+const addBookBtn = document.getElementById('add-btn')
 const closeModal = document.getElementById('close-modal');
 const userInputTitle = document.getElementById('title');
 const userInputAuthor = document.getElementById('author');
@@ -99,9 +99,26 @@ class Library {
         userInputRead.value = 'Not read';
     });
 
-    addBook.addEventListener('click', () => {
-        event.preventDefault();
-        newBookModal.style.visibility = 'hidden';
+    addBookBtn.addEventListener('click', (e) => {
+        console.log('pressed')
+        e.preventDefault()
+        function validate(inputID) {
+            const input = inputID;
+            const validityState = input.validity;
+
+            if (validityState.valueMissing) {
+                input.setCustomValidity("You gotta fill this out, yo!");
+              
+              } else {
+                input.setCustomValidity("");
+              }
+              input.reportValidity();
+
+        }
+
+        validate(userInputTitle);
+        validate(userInputAuthor);
+
         const newBook = new Book(userInputTitle.value, userInputAuthor.value, userInputPages.value, userInputRead.value);
         if (!userInputRead.checked) {
             userInputRead.value = 'Not read';
@@ -109,11 +126,20 @@ class Library {
         if (userInputRead.checked) {
             userInputRead.value = 'Read';
         }
-        if (userInputTitle.value == '' | userInputAuthor.value == '' | userInputPages == '') {
-            alert('Please input title, author, pages.');
-            return;
-        };
-        myLibrary.addBook(newBook);
+
+        console.log(userInputTitle.checkValidity(), userInputAuthor.checkValidity(), userInputPages.checkValidity())
+        if (!userInputTitle.checkValidity()) {
+            userInputTitle.setCustomValidity('Please input the title of the book.')
+        }
+        if (!userInputAuthor.checkValidity()) {
+            userInputAuthor.setCustomValidity('Please input the author.')
+        }
+
+        if(userInputTitle.checkValidity() && userInputAuthor.checkValidity()) {
+            newBookModal.style.visibility = 'hidden';
+            myLibrary.addBook(newBook) 
+        }
+
     });
 
     closeModal.addEventListener('click', () => {
